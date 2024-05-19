@@ -1,6 +1,5 @@
 package com.cli;
 import java.util.Scanner;
-import java.util.List;
 
 public class InputHandler {
     private final MiniGit myGit;
@@ -12,12 +11,9 @@ public class InputHandler {
     }
 
     public void handleInput() {
-
-        System.out.println("MiniGithub에 오신 것을 환영합니다!");
-
+        MessagePrinter.printWelcomeMessage();
         while (true) {
-            List<String> repositoryNames = myGit.getRepositoriyNames();
-            printInitMessage(repositoryNames);
+            MessagePrinter.printLoopInitMessage(myGit.getRepositoriyNames());
             String command = scanner.nextLine();
             String repoName;
             String fileName;
@@ -27,43 +23,36 @@ public class InputHandler {
             }
             switch (command) {
                 case "init":
-                    System.out.println("추가할 레포지토리 이름을 입력해 주세요.");
+                    MessagePrinter.printAddRepoPrompt();
                     repoName = scanner.nextLine();
                     myGit.init(repoName);
                     break;
                 case "add":
-                    System.out.println("파일을 추가할 레포지토리 이름을 입력해 주세요.");
+                    MessagePrinter.printAddFileRepoPrompt();
                     repoName = scanner.nextLine();
-                    System.out.println("추가할 파일 타입을 선택해 주세요.");
-                    System.out.println("1 : TextFile, 2 : BinaryFile");
+                    MessagePrinter.printAddFileTypePrompt();
+                    MessagePrinter.printFileTypeOptions();
                     type = Integer.parseInt(scanner.nextLine()); // 개행 처리를 위해 nextInt() 대신 nextLine() 사용 후 파싱
-                    System.out.println("추가할 파일 이름을 입력해 주세요.");
+                    MessagePrinter.printAddFileNamePrompt();
                     fileName = scanner.nextLine();
                     myGit.add(repoName, type, fileName);
                     break;
                 case "commit":
-                    System.out.println("커밋할 레포지토리 이름을 입력해 주세요.");
+                    MessagePrinter.printCommitRepoPrompt();
                     repoName = scanner.nextLine();
-                    System.out.println("커밋 메세지를 입력해 주세요.");
+                    MessagePrinter.printCommitMessagePrompt();
                     String message = scanner.nextLine();
                     myGit.commit(repoName, message);
                     break;
                 case "push":
-                    System.out.println("커밋할 레포지토리 이름을 입력해 주세요.");
+                    MessagePrinter.printCommitRepoPrompt();
                     repoName = scanner.nextLine();
                     myGit.push(repoName);
                     break;
                 default:
-                    System.out.println("올바른 명령어 형식이 아닙니다.");
-                    System.out.println("ex) init, exit, add, commit, push");
+                    MessagePrinter.printInvalidCommandMessage();
+                    MessagePrinter.printCommandExamples();
             }
         }
-    }
-
-    private void printInitMessage(List<String> repositoryNames) {
-        System.out.println("원하시는 명령어를 입력해 주세요.");
-        System.out.println("현재 레포지토리 : ");
-        System.out.println(repositoryNames);
-        System.out.println("> ");
     }
 }
