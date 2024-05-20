@@ -4,11 +4,11 @@ public class FileHandler {
 
     public FileHandler() {}
 
-    public File makeFile(int type, String fileName) {
+    public File makeFile(FileType type, String fileName) {
         File file;
-        if (type == 1) {
+        if (type == FileType.TEXT_FILE) {
             file = new TextFile(fileName);
-        } else{
+        } else {
             file = new BinaryFile(fileName);
         }
         return file;

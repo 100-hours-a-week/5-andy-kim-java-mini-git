@@ -1,4 +1,5 @@
 package com.cli;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class MiniGit extends VersionControlSystem {
     }
 
     @Override
-    public void add(String repoName, int type, String file) {
+    public void add(String repoName, FileType type, String file) {
         Repository repo = findRepositoryByName(repoName);
         if (repo != null) {
             files.add(fileHandler.makeFile(type, file));

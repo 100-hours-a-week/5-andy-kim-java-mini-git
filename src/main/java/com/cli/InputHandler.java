@@ -1,5 +1,8 @@
 package com.cli;
+
 import java.util.Scanner;
+import java.util.List;
+import static com.cli.MessageConstants.*;
 
 public class InputHandler {
     private final MiniGit myGit;
@@ -17,7 +20,7 @@ public class InputHandler {
             String command = scanner.nextLine();
             String repoName;
             String fileName;
-            int type;
+            FileType type;
             if (command.equals("exit")) {
                 break;
             }
@@ -30,9 +33,10 @@ public class InputHandler {
                 case "add":
                     MessagePrinter.printAddFileRepoPrompt();
                     repoName = scanner.nextLine();
-                    MessagePrinter.printAddFileTypePrompt();
-                    MessagePrinter.printFileTypeOptions();
-                    type = Integer.parseInt(scanner.nextLine()); // 개행 처리를 위해 nextInt() 대신 nextLine() 사용 후 파싱
+                    type = promptFileType();
+                    if (type == null) {
+                        continue; // 루프의 다음 반복으로 건너뜁니다.
+                    }
                     MessagePrinter.printAddFileNamePrompt();
                     fileName = scanner.nextLine();
                     myGit.add(repoName, type, fileName);
@@ -54,5 +58,23 @@ public class InputHandler {
                     MessagePrinter.printCommandExamples();
             }
         }
+    }    private FileType promptFileType() {
+        MessagePrinter.printAddFileTypePrompt();
+        MessagePrinter.printFileTypeOptions();
+        try {
+            int typeInput = Integer.parseInt(scanner.nextLine());
+            if (typeInput == 1) {
+                return FileType.TEXT_FILE;
+            } else if (typeInput == 2) {
+                return FileType.BINARY_FILE;
+            } else {
+                throw new IllegalArgumentException("Invalid file type");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("잘못된 입력입니다. 숫자를 입력해 주세요.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("잘못된 파일 타입입니다. 1 또는 2를 입력해 주세요.");
+        }
+        return null;
     }
 }

@@ -6,7 +6,7 @@ public abstract class VersionControlSystem extends Software{
     }
 
     public abstract void init(String name);
-    public abstract void add(String repoName, int type, String file);
+    public abstract void add(String repoName, FileType type, String file);
     public abstract void commit(String repoName, String message);
     public abstract void push(String repoName);
 }
