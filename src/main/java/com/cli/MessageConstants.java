@@ -16,4 +16,7 @@ public class MessageConstants {
     public static final String COMMIT_MESSAGE_PROMPT = "커밋 메세지를 입력해 주세요.";
     public static final String INVALID_COMMAND_MESSAGE = "올바른 명령어 형식이 아닙니다.";
     public static final String COMMAND_EXAMPLES = "ex) init, exit, add, commit, push";
+
+    public static final String INVALID_INPUT_MESSAGE = "잘못된 입력입니다. 숫자를 입력해 주세요.";
+    public static final String INVALID_FILE_TYPE_MESSAGE = "잘못된 파일 타입입니다. 1 또는 2를 입력해 주세요.";
 }

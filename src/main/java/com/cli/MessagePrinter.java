@@ -60,4 +60,12 @@ public class MessagePrinter {
     public static void printCommandExamples() {
         System.out.println(COMMAND_EXAMPLES);
     }
+
+    public static void printInvalidInputMessage() {
+        System.out.println(INVALID_INPUT_MESSAGE);
+    }
+
+    public static void printInvalidFileTypeMessage() {
+        System.out.println(INVALID_FILE_TYPE_MESSAGE);
+    }
 }

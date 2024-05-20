@@ -58,7 +58,8 @@ public class InputHandler {
                     MessagePrinter.printCommandExamples();
             }
         }
-    }    private FileType promptFileType() {
+    }
+    private FileType promptFileType() {
         MessagePrinter.printAddFileTypePrompt();
         MessagePrinter.printFileTypeOptions();
         try {
@@ -71,9 +72,9 @@ public class InputHandler {
                 throw new IllegalArgumentException("Invalid file type");
             }
         } catch (NumberFormatException e) {
-            System.out.println("잘못된 입력입니다. 숫자를 입력해 주세요.");
+            MessagePrinter.printInvalidInputMessage();
         } catch (IllegalArgumentException e) {
-            System.out.println("잘못된 파일 타입입니다. 1 또는 2를 입력해 주세요.");
+            MessagePrinter.printInvalidFileTypeMessage();
         }
         return null;
     }
