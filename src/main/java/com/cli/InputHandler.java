@@ -13,7 +13,7 @@ public class InputHandler {
     public void handleInput() {
         MessagePrinter.printWelcomeMessage();
         while (true) {
-            MessagePrinter.printLoopInitMessage(myGit.getRepositoriyNames());
+            MessagePrinter.printLoopInitMessage(myGit.getRepositoryNames());
             String command = scanner.nextLine();
             String repoName;
             String fileName;

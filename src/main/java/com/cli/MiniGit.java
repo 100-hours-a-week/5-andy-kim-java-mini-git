@@ -2,7 +2,7 @@ package com.cli;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MiniGit extends VersionControlSystem{
+public class MiniGit extends VersionControlSystem {
     private final List<Repository> repositories;
     private FileHandler fileHandler;
     private List<File> files;
@@ -22,40 +22,46 @@ public class MiniGit extends VersionControlSystem{
 
     @Override
     public void add(String repoName, int type, String file) {
-        for (Repository repo : repositories) {
-            if (repo.getName().equals(repoName)) {
-                files.add(fileHandler.makeFile(type, file));
-                System.out.println("Added file: " + file);
-                return;
-            }
+        Repository repo = findRepositoryByName(repoName);
+        if (repo != null) {
+            files.add(fileHandler.makeFile(type, file));
+            System.out.println("Added file: " + file);
+        } else {
+            System.out.println("레포지토리가 존재하지 않습니다. : " + repoName);
         }
-        System.out.println("레포지토리가 존재하지 않습니다. : " + repoName);
     }
 
     @Override
     public void commit(String repoName, String message) {
-        for (Repository repo : repositories) {
-            if (repo.getName().equals(repoName)) {
-                repo.commit(message, files);
-                System.out.println("Committed to " + repoName + "with message : " + message);
-                return;
-            }
+        Repository repo = findRepositoryByName(repoName);
+        if (repo != null) {
+            repo.commit(message, files);
+            System.out.println("Committed to " + repoName + " with message : " + message);
+        } else {
+            System.out.println("레포지토리가 존재하지 않습니다. : " + repoName);
         }
-        System.out.println("레포지토리가 존재하지 않습니다. : " + repoName);
     }
 
     @Override
-    public void push(String repoName){
-        for (Repository repo : repositories) {
-            if (repo.getName().equals(repoName)) {
-                repo.push();
-                return;
-            }
+    public void push(String repoName) {
+        Repository repo = findRepositoryByName(repoName);
+        if (repo != null) {
+            repo.push();
+        } else {
+            System.out.println("레포지토리가 존재하지 않습니다. : " + repoName);
         }
-        System.out.println("레포지토리가 존재하지 않습니다. : " + repoName);
     }
 
-    public List<String> getRepositoriyNames() {
+    private Repository findRepositoryByName(String repoName) {
+        for (Repository repo : repositories) {
+            if (repo.getName().equals(repoName)) {
+                return repo;
+            }
+        }
+        return null;
+    }
+
+    public List<String> getRepositoryNames() {
         return new ArrayList<>(repositories.stream().map(Repository::getName).toList());
     }
 }
