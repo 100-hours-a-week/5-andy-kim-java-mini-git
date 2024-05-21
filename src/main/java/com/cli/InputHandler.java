@@ -1,8 +1,6 @@
 package com.cli;
 
 import java.util.Scanner;
-import java.util.List;
-import static com.cli.MessageConstants.*;
 
 public class InputHandler {
     private final MiniGit myGit;
@@ -32,14 +30,13 @@ public class InputHandler {
                     break;
                 case "add":
                     MessagePrinter.printAddFileRepoPrompt();
-                    repoName = scanner.nextLine();
                     type = promptFileType();
                     if (type == null) {
                         continue; // 루프의 다음 반복으로 건너뜁니다.
                     }
                     MessagePrinter.printAddFileNamePrompt();
                     fileName = scanner.nextLine();
-                    myGit.add(repoName, type, fileName);
+                    myGit.add(type, fileName);
                     break;
                 case "commit":
                     MessagePrinter.printCommitRepoPrompt();

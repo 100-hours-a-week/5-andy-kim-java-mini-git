@@ -22,14 +22,9 @@ public class MiniGit extends VersionControlSystem {
     }
 
     @Override
-    public void add(String repoName, FileType type, String file) {
-        Repository repo = findRepositoryByName(repoName);
-        if (repo != null) {
-            files.add(fileHandler.makeFile(type, file));
-            System.out.println("Added file: " + file);
-        } else {
-            System.out.println("레포지토리가 존재하지 않습니다. : " + repoName);
-        }
+    public void add(FileType type, String file) {
+        files.add(fileHandler.makeFile(type, file));
+        System.out.println("Added file: " + file);
     }
 
     @Override
