@@ -13,6 +13,27 @@ public class MiniGit extends VersionControlSystem {
         this.repositories = new ArrayList<>();
         this.fileHandler = new FileHandler();
         this.files = new ArrayList<>();
+        initializeReposAndFiles();
+    }
+
+    private void initializeReposAndFiles() {
+        // 미리 파일 추가
+        files.add(fileHandler.makeFile(FileType.TEXT_FILE, "README.md"));
+        files.add(fileHandler.makeFile(FileType.BINARY_FILE, "logo.png"));
+
+        // 첫 번째 레포지토리 생성 및 초기화
+        Repository repo1 = new Repository("Repo1");
+        repositories.add(repo1);
+        repo1.commit("Initial commit", files);
+
+        // 두 번째 레포지토리 생성 및 초기화
+        Repository repo2 = new Repository("Repo2");
+        repositories.add(repo2);
+        List<File> repo2Files = new ArrayList<>();
+        repo2Files.add(fileHandler.makeFile(FileType.TEXT_FILE, "index.html"));
+        repo2Files.add(fileHandler.makeFile(FileType.TEXT_FILE, "style.css"));
+        repo2.commit("Initial commit", repo2Files);
+        repo2.commit("Added more styles", repo2Files);
     }
 
     @Override
