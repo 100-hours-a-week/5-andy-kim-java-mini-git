@@ -39,16 +39,17 @@ public class InputHandler {
                     myGit.add(type, fileName);
                     break;
                 case "commit":
-                    MessagePrinter.printCommitRepoPrompt();
-                    repoName = scanner.nextLine();
                     MessagePrinter.printCommitMessagePrompt();
                     String message = scanner.nextLine();
-                    myGit.commit(repoName, message);
+                    myGit.commit(message);
                     break;
                 case "push":
                     MessagePrinter.printCommitRepoPrompt();
                     repoName = scanner.nextLine();
                     myGit.push(repoName);
+                    break;
+                case "show":
+                    myGit.show();
                     break;
                 default:
                     MessagePrinter.printInvalidCommandMessage();

@@ -11,7 +11,7 @@ public class File {
         this.fileName = fileName;
     }
 
-    public String getFileName() {
+    public String getName() {
         return fileName;
     }
 }

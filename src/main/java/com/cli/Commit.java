@@ -1,6 +1,7 @@
 package com.cli;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Commit {
     private final String message;
@@ -10,7 +11,7 @@ public class Commit {
     public Commit(String message, List<File> files) {
         this.message = message;
         this.timestamp = new Date();
-        this.files = files;
+        this.files = new ArrayList<>(files);
     }
 
     public String getMessage() {

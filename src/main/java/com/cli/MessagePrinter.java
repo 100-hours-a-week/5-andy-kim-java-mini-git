@@ -13,7 +13,7 @@ public class MessagePrinter {
     // 초기 루프 메시지와 레포지토리 이름 목록을 출력하는 메서드
     public static void printLoopInitMessage(List<String> repositoryNames) {
         System.out.println(ENTER_COMMAND_MESSAGE);
-        System.out.print(CURRENT_REPOSITORIES_MESSAGE);
+        System.out.println(CURRENT_REPOSITORIES_MESSAGE);
         if (repositoryNames.isEmpty()) {
             System.out.println(NO_REPOSITORIES_MESSAGE);
         } else {
